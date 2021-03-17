@@ -1,0 +1,3 @@
+[submodule "lmdbpp"]
+	path = lmdbpp
+	url = https://github.com/Rouji/lmdbpp.git
