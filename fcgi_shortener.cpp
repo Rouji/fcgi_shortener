@@ -77,7 +77,7 @@ void fcgi_thread(ThreadContext* context)
 
                     FCGX_FPrintF(
                         req.out,
-                        "Content-type: text/html; charset=utf-8\r\n"
+                        "Content-type: text/plain; charset=utf-8\r\n"
                         "\r\n"
                         "%s://%s/%s",
                         FCGX_GetParam("REQUEST_SCHEME", req.envp),
@@ -141,7 +141,7 @@ Or use this form:
                     FCGX_FPrintF(
                         req.out,
                         "Status: 301\r\n"
-                        "Content-type: text/html; charset=utf-8\r\n"
+                        "Content-type: text/plain; charset=utf-8\r\n"
                         "Location: %s\r\n"
                         "\r\n"
                         "%s\r\n",
@@ -154,7 +154,7 @@ Or use this form:
                     FCGX_FPrintF(
                         req.out,
                         "Status: 404\r\n"
-                        "Content-type: text/html; charset=utf-8\r\n"
+                        "Content-type: text/plain; charset=utf-8\r\n"
                         "\r\n"
                         "Error 404: Not found"
                     );
