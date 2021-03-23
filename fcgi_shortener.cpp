@@ -156,7 +156,7 @@ Or use this form:
         const std::string_view body{_buf, len};
         auto link = multipart_formdata_first_value(body);
 
-        if (link.find("://") == std::string_view::npos)
+        if (link.rfind("https://", 0) != 0 && link.rfind("http://", 0) != 0)
         {
             _print_err(_req.out, 400, "Invalid URL");
             return;
