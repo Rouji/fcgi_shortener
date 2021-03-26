@@ -87,10 +87,10 @@ private:
     Context& _context;
     char _buf[1024];
 
-    void _print_err(FCGX_Stream* stream, int status, const char* msg)
+    void _print_err(int status, const char* msg)
     {
         FCGX_FPrintF(
-            stream,
+            _req.out,
             "Content-type: text/plain; charset=utf-8" EOL
             "Status: %d" EOL
             EOL
@@ -148,7 +148,7 @@ Or use this form:
         std::string_view content_type{FCGX_GetParam("CONTENT_TYPE", _req.envp)};
         if (content_type.find("multipart/form-data") == std::string_view::npos)
         {
-            _print_err(_req.out, 400, "Unsupported request format");
+            _print_err(400, "Unsupported request format");
             return;
         }
 
@@ -158,7 +158,7 @@ Or use this form:
 
         if (link.rfind("https://", 0) != 0 && link.rfind("http://", 0) != 0)
         {
-            _print_err(_req.out, 400, "Invalid URL");
+            _print_err(400, "Invalid URL");
             return;
         }
 
@@ -216,7 +216,7 @@ Or use this form:
         }
         catch (lmdbpp::NotFoundError& e)
         {
-            _print_err(_req.out, 404, "Not Found");
+            _print_err(404, "Not Found");
         }
     }
 };
